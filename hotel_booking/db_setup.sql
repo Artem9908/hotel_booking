@@ -1,0 +1,30 @@
+CREATE TABLE Buildings (
+    BuildingID INT AUTO_INCREMENT PRIMARY KEY,
+    BuildingName VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE Rooms (
+    RoomID INT AUTO_INCREMENT PRIMARY KEY,
+    BuildingID INT NOT NULL,
+    RoomNumber VARCHAR(10) NOT NULL,
+    FOREIGN KEY (BuildingID) REFERENCES Buildings(BuildingID)
+);
+
+CREATE TABLE Clients (
+    ClientID INT AUTO_INCREMENT PRIMARY KEY,
+    FirstName VARCHAR(50) NOT NULL,
+    LastName VARCHAR(50) NOT NULL,
+    Phone VARCHAR(20),
+    Email VARCHAR(100)
+);
+
+CREATE TABLE Bookings (
+    BookingID INT AUTO_INCREMENT PRIMARY KEY,
+    RoomID INT NOT NULL,
+    ClientID INT NOT NULL,
+    CheckInDate DATE NOT NULL,
+    CheckOutDate DATE NOT NULL,
+    TotalCost DECIMAL(10,2) NOT NULL,
+    FOREIGN KEY (RoomID) REFERENCES Rooms(RoomID),
+    FOREIGN KEY (ClientID) REFERENCES Clients(ClientID)
+);
